@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>IMGLibOpen</title>
+<link rel="stylesheet" href="styles.css?v=1.0.0">
+</head>
+<body>
+<div id="jsFallback" class="js-fallback"><b>IMGLibOpen</b><span>JavaScript load नहीं हुआ। Page reload करें।</span></div>
+<header class="topbar"><div class="brand">IMGLibOpen</div><button id="menuBtn" class="menu-btn" type="button">☰ <span>Menu</span></button></header>
+
+<main class="main">
+<section class="toolbar">
+<div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Image, category, keyword या date खोजें…"><button id="clearSearch" class="clear hidden" type="button">×</button></div>
+<div class="controls"><div class="tabs"><button class="tab active" data-tab="all" type="button">All</button><button class="tab" data-tab="activity" type="button">Activity</button></div><select id="sortSelect"><option value="newest">Time — Newest first</option><option value="oldest">Time — Oldest first</option><option value="az">Image Name — A–Z</option><option value="za">Image Name — Z–A</option></select></div>
+<div id="categoryBar" class="categories"></div>
+</section>
+<div id="statusArea" class="status"></div>
+<section id="gallery" class="gallery"></section>
+<section id="emptyState" class="empty hidden"><div>▧</div><h2 id="emptyTitle">No images</h2><p id="emptyText">अभी कोई image उपलब्ध नहीं है।</p></section>
+</main>
+
+<aside id="menuPanel" class="menu-panel" aria-hidden="true">
+<div class="menu-head"><h2>Menu</h2><button id="menuClose" class="close" type="button">×</button></div>
+<div class="menu-body">
+<button id="openUpload" class="menu-item" type="button">⇧ &nbsp; Upload</button>
+<button id="openForce" class="menu-item danger" type="button">⌫ &nbsp; Force</button>
+<hr><div class="label">Mode</div>
+<button id="normalMode" class="menu-item" type="button">☀ &nbsp; Normal</button>
+<button id="darkMode" class="menu-item" type="button">☾ &nbsp; Dark</button>
+<hr><small>Repository: <b id="repoInfo">Detecting…</b></small>
+</div></aside>
+<div id="menuBackdrop" class="backdrop" hidden></div>
+
+<div id="viewerModal" class="modal" hidden><div class="viewer">
+<button id="viewerClose" class="viewer-close" type="button">×</button>
+<div class="viewer-img"><img id="viewerImage" alt=""></div>
+<div class="viewer-meta"><div><b id="viewerName">Image</b><small id="viewerDate"></small></div>
+<div class="actions"><a id="downloadBtn" class="action" download>Download</a><a id="originalBtn" class="action" target="_blank" rel="noopener">Original</a><button id="viewerForce" class="trash" type="button" title="Force Delete">🗑</button></div></div>
+</div></div>
+
+<div id="uploadModal" class="modal" hidden><div class="dialog"><div class="dialog-head"><h2>Upload Images</h2><button class="close modal-close" data-close="uploadModal" type="button">×</button></div>
+<form id="uploadForm">
+<label>Password<input id="uploadPassword" type="password" required></label>
+<label>Fine-grained GitHub token<input id="uploadToken" type="password" required><small>Token code में save नहीं होगा।</small></label>
+<label>Category<input id="uploadCategory" list="categoryOptions" placeholder="जैसे NSS, Events, Logos"></label>
+<label>Keywords<input id="uploadKeywords" placeholder="comma separated keywords"></label>
+<label>Images<input id="uploadFiles" type="file" accept="image/*" multiple required></label>
+<div id="uploadPreview" class="preview"></div>
+<small>एक batch में कई images चुन सकते हैं; सभी पर वही category और keywords लगेंगे।</small>
+<div id="uploadProgress" class="progress" hidden></div><button class="primary" type="submit">Upload Selected Images</button>
+</form></div></div>
+
+<div id="forceModal" class="modal" hidden><div class="dialog wide"><div class="dialog-head"><h2>Force</h2><button class="close modal-close" data-close="forceModal" type="button">×</button></div>
+<form id="forceForm">
+<label>Password<input id="forcePassword" type="password" required></label>
+<label>Fine-grained GitHub token<input id="forceToken" type="password" required></label>
+<div class="select-tools"><button id="selectAll" class="secondary" type="button">Select all</button><button id="selectNone" class="secondary" type="button">Clear</button></div>
+<div id="forceList" class="force-list"></div><div id="forceProgress" class="progress" hidden></div><button class="danger-btn" type="submit">Force Delete Selected</button>
+</form></div></div>
+
+<datalist id="categoryOptions"></datalist><div id="toast" class="toast"></div>
+<script src="app.js?v=1.0.0"></script>
+</body></html>
